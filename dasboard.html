@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portal Pendakian Gunung Ciremai - Booking online, panduan lengkap, dan informasi terkini">
+    <title>Ciremai Nikreuh - Portal Pendakian Gunung Ciremai</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style_CN.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="navbar navbar-expand-lg navbar-dark header sticky-top">
+        <div class="container">
+            <!-- Brand -->
+            <a href="dasboard.html" class="navbar-brand d-flex align-items-center">
+                <img src="img/logo_CN.png" alt="logo CN" class="logo">
+                <i class="bi bi-mountain fs-3 me-2"></i>
+                <span class="judul">Ciremai Nikreuh</span>
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#info">
+                            <i class="bi bi-info-circle me-1"></i>Info Gunung
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#jalur">
+                            <i class="bi bi-map me-1"></i>Jalur
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#booking">
+                            <i class="bi bi-calendar-check me-1"></i>Booking
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#panduan">
+                            <i class="bi bi-book me-1"></i>Panduan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">
+                            <i class="bi bi-journal-text me-1"></i>Blog
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#komunitas">
+                            <i class="bi bi-people me-1"></i>Komunitas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#kontak">
+                            <i class="bi bi-envelope me-1"></i>Kontak
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Auth Buttons -->
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>
+                        <span class="d-none d-sm-inline">Login</span>
+                    </button>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#signupModal">
+                        <i class="bi bi-person-plus me-1"></i>
+                        <span class="d-none d-sm-inline">Daftar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4">
+                            Jelajahi Keindahan <span class="text-primary">Gunung Ciremai</span>
+                        </h1>
+                        <p class="lead">
+                            Portal terpercaya untuk pendakian Gunung Ciremai. Booking online, panduan lengkap, dan informasi terkini untuk petualangan Anda.
+                        </p>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a href="#booking" class="btn btn-primary btn-lg">
+                                <i class="bi bi-calendar-check me-2"></i>Booking Sekarang
+                            </a>
+                            <a href="#info" class="btn btn-outline-primary btn-lg">
+                                <i class="bi bi-info-circle me-2"></i>Info Lengkap
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-image">
+                            <div class="mountain-placeholder">
+                                <i class="bi bi-mountain"></i>
+                                <p class="text-muted mb-0">Gunung Ciremai</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card text-center">
+                            <i class="bi bi-mountain display-6"></i>
+                            <h3>3,078m</h3>
+                            <p>Ketinggian</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card text-center">
+                            <i class="bi bi-signpost-2 display-6"></i>
+                            <h3>5</h3>
+                            <p>Jalur Pendakian</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card text-center">
+                            <i class="bi bi-people display-6"></i>
+                            <h3>10K+</h3>
+                            <p>Pendaki/Tahun</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card text-center">
+                            <i class="bi bi-star-fill display-6"></i>
+                            <h3>4.8</h3>
+                            <p>Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-box-arrow-in-right me-2"></i>Login ke Akun Anda
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">
+                                <i class="bi bi-envelope me-1"></i>Email
+                            </label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">
+                                <i class="bi bi-lock me-1"></i>Password
+                            </label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">
+                                Ingat saya selama 30 hari
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-check-circle me-2"></i>Masuk
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <div class="text-center">
+                        <p class="mb-2">Belum punya akun? 
+                            <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">
+                                Daftar sekarang
+                            </button>
+                        </p>
+                        <p class="mb-0">
+                            <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal">
+                                Lupa password?
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-person-plus me-2"></i>Buat Akun Baru
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="signupName" class="form-label">
+                                <i class="bi bi-person me-1"></i>Nama Lengkap
+                            </label>
+                            <input type="text" class="form-control" id="signupName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">
+                                <i class="bi bi-envelope me-1"></i>Email
+                            </label>
+                            <input type="email" class="form-control" id="signupEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPassword" class="form-label">
+                                <i class="bi bi-lock me-1"></i>Password
+                            </label>
+                            <input type="password" class="form-control" id="signupPassword" required>
+                            <div class="form-text">Minimal 8 karakter dengan kombinasi huruf dan angka.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">
+                                <i class="bi bi-lock-fill me-1"></i>Konfirmasi Password
+                            </label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                Saya setuju dengan <a href="#terms">Syarat & Ketentuan</a> 
+                                dan <a href="#privacy">Kebijakan Privasi</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-check-circle me-2"></i>Daftar Sekarang
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <div class="text-center">
+                        <p class="mb-0">Sudah punya akun? 
+                            <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
+                                Login sekarang
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-key me-2"></i>Reset Password
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Masukkan email Anda dan kami akan mengirimkan link untuk reset password.
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label for="resetEmail" class="form-label">
+                                <i class="bi bi-envelope me-1"></i>Email
+                            </label>
+                            <input type="email" class="form-control" id="resetEmail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-send me-2"></i>Kirim Link Reset
+                        </button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <div class="text-center">
+                        <p class="mb-0">Ingat password? 
+                            <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">
+                                Login sekarang
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2024 Ciremai Nikreuh. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
