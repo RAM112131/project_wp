@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Daftar akun Portal Pendakian Gunung Ciremai">
+    <title>Daftar - Ciremai Nikreuh</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style_CN.css">
+</head>
+<body>
+    <!-- Close Button -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
+        <a href="0dashboard.html" class="btn btn-light btn-sm rounded-circle shadow" title="Kembali ke Dashboard">
+            <i class="bi bi-x-lg"></i>
+        </a>
+    </div>
+
+    <!-- Signup Section -->
+    <main class="py-5 min-vh-100 d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <!-- Brand Section -->
+                    <div class="text-center mb-4">
+                        <a href="0dashboard.html" class="text-decoration-none">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+                                <img src="img/logo_CN.png" alt="logo CN" class="logo me-2" style="height: 40px;">
+                                <i class="bi bi-mountain fs-2 text-primary me-2"></i>
+                                <span class="h4 text-dark mb-0">Ciremai Nikreuh</span>
+                            </div>
+                        </a>
+                        <p class="text-muted">Portal Pendakian Gunung Ciremai</p>
+                    </div>
+
+                    <div class="card shadow">
+                        <div class="card-header text-center bg-primary text-white">
+                            <h4 class="mb-0">
+                                <i class="bi bi-person-plus me-2"></i>Buat Akun Baru
+                            </h4>
+                        </div>
+                        <div class="card-body p-4">
+                            <form id="signupForm">
+                                <div class="mb-3">
+                                    <label for="signupName" class="form-label">
+                                        <i class="bi bi-person me-1"></i>Nama Lengkap
+                                    </label>
+                                    <input type="text" class="form-control" id="signupName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupEmail" class="form-label">
+                                        <i class="bi bi-envelope me-1"></i>Email
+                                    </label>
+                                    <input type="email" class="form-control" id="signupEmail" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="signupPassword" class="form-label">
+                                        <i class="bi bi-lock me-1"></i>Password
+                                    </label>
+                                    <input type="password" class="form-control" id="signupPassword" required>
+                                    <div class="form-text">Minimal 8 karakter dengan kombinasi huruf dan angka.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">
+                                        <i class="bi bi-lock-fill me-1"></i>Konfirmasi Password
+                                    </label>
+                                    <input type="password" class="form-control" id="confirmPassword" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                    <label class="form-check-label" for="agreeTerms">
+                                        Saya setuju dengan <a href="#terms" class="text-decoration-none">Syarat & Ketentuan</a> 
+                                        dan <a href="#privacy" class="text-decoration-none">Kebijakan Privasi</a>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 mb-3">
+                                    <i class="bi bi-check-circle me-2"></i>Daftar Sekarang
+                                </button>
+                            </form>
+                            
+                            <div class="text-center">
+                                <p class="mb-0">Sudah punya akun? 
+                                    <a href="masuk.html" class="text-decoration-none">
+                                        Login sekarang
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; 2024 Ciremai Nikreuh. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Handle signup form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            
+            // Validation
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Mohon lengkapi semua field!');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password minimal 8 karakter!');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('Password tidak cocok!');
+                return;
+            }
+            
+            if (!agreeTerms) {
+                alert('Mohon setujui syarat & ketentuan!');
+                return;
+            }
+            
+            // Validate password strength (basic)
+            const hasLetter = /[a-zA-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            
+            if (!hasLetter || !hasNumber) {
+                alert('Password harus mengandung kombinasi huruf dan angka!');
+                return;
+            }
+            
+            // Here you would typically send data to your backend
+            alert('Pendaftaran berhasil! Silakan login dengan akun baru Anda. (Demo)');
+            // Redirect to login page
+            window.location.href = 'masuk.html';
+        });
+
+        // Real-time password validation
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.setCustomValidity('Password tidak cocok');
+                this.classList.add('is-invalid');
+            } else {
+                this.setCustomValidity('');
+                this.classList.remove('is-invalid');
+            }
+        });
+
+        // Password strength indicator
+        document.getElementById('signupPassword').addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (/[a-zA-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^a-zA-Z0-9]/.test(password)) strength++;
+            
+            const strengthText = ['Lemah', 'Sedang', 'Kuat', 'Sangat Kuat'];
+            const strengthColor = ['text-danger', 'text-warning', 'text-info', 'text-success'];
+            
+            let feedback = this.parentNode.querySelector('.password-strength');
+            if (!feedback) {
+                feedback = document.createElement('div');
+                feedback.className = 'password-strength small mt-1';
+                this.parentNode.appendChild(feedback);
+            }
+            
+            if (password.length > 0) {
+                feedback.innerHTML = `Kekuatan password: <span class="${strengthColor[strength-1] || 'text-danger'}">${strengthText[strength-1] || 'Sangat Lemah'}</span>`;
+            } else {
+                feedback.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>
