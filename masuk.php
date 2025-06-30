@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -25,3 +26,5 @@
     <script src="script_login.js"></script>
 </body>
 </html>
+=======
+>>>>>>> 63ddc228d710e92fec4f6911c7d6225c5b71e141
