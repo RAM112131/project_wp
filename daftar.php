@@ -18,22 +18,25 @@
                     <!-- tampilan form daftar -->
                     <div class="col-sm p-5 text-white">
                         <h1>Mari Bergabung!</h1>
-                        <p>Daftar untuk mulai merencanakan pendakian ke Gunung Ciremai</p>
-                        <!-- buat form username, nama lengkap, no-hp/wa/telp, email, kata_sandi, konfirmasi kata sandi menggunakan boostrap yaitu supported elements-->
-                        
+                        <p>Daftar untuk mulai merencanakan pendakian ke Gunung Ciremai</p>                        
                         <form class="was-validated">
-                            <div class="mb-3">
-                                <label for="validationUsername" class="form-label">Username</label>
-                                <input type="text" autocomplete="username" class="form-control" id="validationUsername" placeholder="Buat Username..." required>
-                                <div class="invalid-feedback">
-                                Tolong Buat Username Anda
-                                </div>
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="username" placeholder="Masukkan username" required maxlength="10">
+                            <div class="invalid-feedback">
+                                <b>Username maksimal 10 karakter dan wajib diisi</b>
                             </div>
+                            <div class="valid-feedback">
+                                Username sudah benar!
+                            </div>
+                        </div>
 
-                            <!-- submit daftar -->
-                             
+                        <div class="mb-3">
+                            <button class="btn btn-primary" type="submit">Submit form</button>
+                        </div>
                         </form>
-
+                        
                     </div>
                 </div>
         </section>
