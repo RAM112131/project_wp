@@ -33,6 +33,16 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" placeholder="Masukkan email" required>
+                            <div class="invalid-feedback">
+                                <b>Email wajib diisi</b>
+                            </div>
+                            <div class="valid-feedback">
+                                Email sudah benar!
+                            </div>
+
+                        <div class="mb-3">
                             <button class="btn btn-primary" type="submit">Submit form</button>
                         </div>
                         </form>
