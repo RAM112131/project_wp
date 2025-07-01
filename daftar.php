@@ -7,7 +7,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
         <link rel="stylesheet" href="css/style_daftar.css">
     </head>
-    <body class="bg-primary">
+    <body class="bg-primary ">
         <section class="container my-5 bg-black one-container">
             <div class="row">
                 <div class="col-sm bg-white text-black one-container">
