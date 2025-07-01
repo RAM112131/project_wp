@@ -9,9 +9,9 @@
     </head>
     <body class="bg-primary">
         <section class="container my-5 bg-black one-container">
-            <div class="row ">
+            <div class="row">
                 <div class="col-sm bg-white text-black one-container">
-                    <img src="img/Copilot_20250630_171646.png" class="rounded mx-auto d-block" height="600" alt="Logo Gunung Ciremai">
+                    <img src="img/Copilot_20250630_171646.png" class="img-fluid" alt="Logo Gunung Ciremai">
                 </div>
 
                 <div class="col-sm p-5 text-white">
@@ -20,6 +20,8 @@
                         <p>Daftar untuk mulai merencanakan pendakian ke Gunung Ciremai</p>
                     </div>
                     <form class="was-validated" method="POST" id="registrationForm" action="proses_daftar.php" novalidate>
+                        
+                        <!-- masukan usrname -->
                         <div class="mt-3">
                             <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required maxlength="10">
@@ -30,7 +32,8 @@
                                 Username sudah benar!
                             </div>
                         </div>
-
+                        
+                        <!-- masukan nama lengkap -->
                         <div>
                             <label for="nama_lengkap" class="form-label">Nama Lengkap<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Masukan Nama Lengkap" required>
@@ -41,7 +44,8 @@
                                 Nama sudah di isi dengan benar!
                             </div>
                         </div>
-
+                        
+                        <!-- masukan nomor hp -->
                         <div>
                             <label for="no_hp" class="form-label">No. HP <span class="text-danger">*</span></label>
                             <input type="tel" class="form-control" id="no_hp" name="no_hp" placeholder="Masukkan No. HP" required pattern="[0-9]{10,12}">
@@ -53,6 +57,7 @@
                             </div>
                         </div>
 
+                        <!-- masukan email -->
                         <div>
                             <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" required>
@@ -63,8 +68,9 @@
                                 Email sudah benar!
                             </div>
                         </div>
-                        <!-- password -->
-                        <div class="mb-3">
+
+                        <!-- memasukan kata sandi -->
+                        <div>
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" required minlength="6">
                             <div class="invalid-feedback">
@@ -75,7 +81,8 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
+                        <!-- konfirmasi sandi -->
+                        <div>
                             <label for="confirm_password" class="form-label">Konfirmasi Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Konfirmasi password" required>
                             <div class="invalid-feedback" id="confirm_password_feedback">
@@ -86,12 +93,13 @@
                             </div>
                         </div>
 
-                        <div class="mt-3 text-center">
-                            <button class="btn btn-primary" type="submit">Daftar Sekarang</button>
+                        <div class="mt-4 text-center">
+                            <button class="container-fluid btn btn-primary " type="submit">Daftar Sekarang</button>
+                        </div>
+                        <div class="mt-2 text-center">Sudah punya akun? 
+                            <a href="masuk.php">Masuk disini</a>
                         </div>
                     </form>
-
-
                 </div>
             </div>
         </section>
@@ -112,7 +120,6 @@
                         confirmPasswordField.classList.add('is-invalid');
                     }
                 }
-
                 passwordField.addEventListener('keyup', validatePasswordConfirmation);
                 confirmPasswordField.addEventListener('keyup', validatePasswordConfirmation);
 
