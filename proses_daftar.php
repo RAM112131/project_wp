@@ -1,11 +1,9 @@
 <?php
-// Sertakan file koneksi database
 include 'koneksi.php';
 
-// Cek apakah form disubmit dengan method POST
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Ambil data dari form dan lakukan sanitasi
     $username = trim($_POST['username']);
     $nama_lengkap = trim($_POST['nama_lengkap']);
     $no_hp = trim($_POST['no_hp']);
@@ -13,10 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     
-    // Array untuk menyimpan error
     $errors = array();
     
-    // Validasi input
+    // memvalidasi inputan
     if (empty($username)) {
         $errors[] = "Username wajib diisi";
     } elseif (strlen($username) > 10) {
@@ -49,7 +46,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Konfirmasi password tidak sesuai";
     }
     
-    // Cek apakah username sudah ada
     if (empty($errors)) {
         $check_username = mysqli_prepare($connection, "SELECT id FROM users WHERE username = ?");
         mysqli_stmt_bind_param($check_username, "s", $username);
@@ -62,7 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_close($check_username);
     }
     
-    // Cek apakah email sudah ada
     if (empty($errors)) {
         $check_email = mysqli_prepare($connection, "SELECT id FROM users WHERE email = ?");
         mysqli_stmt_bind_param($check_email, "s", $email);
@@ -75,9 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_stmt_close($check_email);
     }
     
-    // Jika tidak ada error, lakukan insert data
     if (empty($errors)) {
-        // Hash password untuk keamanan
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
         $insert_query = mysqli_prepare($connection, "INSERT INTO users (username, nama_lengkap, no_hp, email, password) VALUES (?, ?, ?, ?, ?)");
