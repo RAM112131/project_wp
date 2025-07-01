@@ -70,11 +70,11 @@
 
                 <!-- Tombol Login dan Daftar -->
                 <div class="d-flex gap-2">
-                    <a href="masuk.html" class="btn tombol-masuk">
+                    <a href="masuk.php" class="btn tombol-masuk">
                         <i class="bi bi-box-arrow-in-right me-1"></i>
                         <span class="d-none d-sm-inline">Login</span>
                     </a>
-                    <a href="daftar.html" class="btn tombol-daftar">
+                    <a href="daftar.php" class="btn tombol-daftar">
                         <i class="bi bi-person-plus me-1"></i>
                         <span class="d-none d-sm-inline">Daftar</span>
                     </a>
