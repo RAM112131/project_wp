@@ -19,7 +19,7 @@
                         <h1>Mari Bergabung!</h1>
                         <p>Daftar untuk mulai merencanakan pendakian ke Gunung Ciremai</p>
                     </div>
-                    <form class="was-validated" method="POST" id="registrationForm" novalidate>
+                    <form class="was-validated" method="POST" id="registrationForm" action="proses_daftar.php" novalidate>
                         <div class="mt-3">
                             <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username" required maxlength="10">
