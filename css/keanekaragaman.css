@@ -1,0 +1,506 @@
+/**
+ * File: keanekaragaman.css (UPDATED VERSION)
+ * Deskripsi: Styling untuk halaman Keanekaragaman Hayati Gunung Ciremai
+ * Updated: Sesuai spesifikasi hijau, putih, glassmorphism
+ */
+
+/* ===== CSS VARIABLES (UPDATED) ===== */
+:root {
+  /* Colors - Updated sesuai spesifikasi */
+  --primary-green: #4caf50; /* Primary color hijau */
+  --secondary-green: #2ecc71; /* Secondary hijau */
+  --light-green: #81c784; /* Light green */
+  --accent-green: #388e3c; /* Dark green untuk accent */
+  --text-dark: #1f2937;
+  --text-medium: #4b5563;
+  --text-light: #6b7280;
+  --white: #ffffff; /* Background utama putih */
+  --light-gray: #f8f9fa; /* Light gray untuk subtle background */
+  --medium-gray: #e5e7eb;
+  --dark-gray: #9ca3af;
+
+  /* Glassmorphism - Updated untuk header */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg-strong: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+  /* Typography */
+  --font-family: "Poppins", sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--white); /* Background putih sesuai spesifikasi */
+  font-size: var(--font-size-base);
+  min-height: 100vh;
+}
+
+/* ===== HEADER STYLES (GLASSMORPHISM) ===== */
+.main-header {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: var(--spacing-md) 0;
+  box-shadow: var(--glass-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Background gradient untuk header agar glassmorphism lebih terlihat */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+  opacity: 0.1;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-lg);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--primary-green); /* Logo hijau */
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+}
+
+.logo-icon {
+  font-size: var(--font-size-xl);
+}
+
+.main-nav {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.nav-link {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--primary-green);
+  background-color: var(--glass-bg-strong);
+}
+
+.nav-link.active {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--primary-green);
+  border-radius: 50%;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.btn-login,
+.btn-register {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+}
+
+.btn-login {
+  background: transparent;
+  color: var(--primary-green);
+  border: 1px solid var(--primary-green);
+}
+
+.btn-login:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-register {
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+.btn-register:hover {
+  background: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-xl) 0;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(46, 204, 113, 0.05));
+  border-radius: var(--radius-2xl);
+}
+
+.page-title {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.mountain-icon {
+  font-size: var(--font-size-3xl);
+  color: var(--primary-green);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--text-medium);
+  font-weight: 400;
+}
+
+/* ===== TAB NAVIGATION ===== */
+.tab-navigation {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tab-btn {
+  background: var(--white);
+  border: 2px solid var(--medium-gray);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  font-family: var(--font-family);
+  font-weight: 500;
+  color: var(--text-medium);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.tab-btn:hover {
+  border-color: var(--primary-green);
+  color: var(--primary-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.tab-btn.active {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== CONTENT CONTAINER ===== */
+.content-container {
+  background: var(--white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--light-gray);
+}
+
+.content-header {
+  background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+  padding: var(--spacing-lg);
+  color: var(--white);
+}
+
+.section-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.section-icon {
+  font-size: var(--font-size-xl);
+}
+
+/* ===== CONTENT BODY ===== */
+.content-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: var(--spacing-xl);
+}
+
+/* Custom Scrollbar */
+.content-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content-body::-webkit-scrollbar-track {
+  background: var(--light-gray);
+  border-radius: var(--radius-sm);
+}
+
+.content-body::-webkit-scrollbar-thumb {
+  background: var(--primary-green);
+  border-radius: var(--radius-sm);
+}
+
+.content-body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-green);
+}
+
+/* ===== INFO SECTIONS ===== */
+.info-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.section-subtitle {
+  background: var(--primary-green);
+  color: var(--white);
+  padding: var(--spacing-md) var(--spacing-lg);
+  margin: 0 calc(-1 * var(--spacing-xl)) var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  text-align: center;
+  border-radius: var(--radius-md);
+}
+
+.section-content {
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+.section-content p {
+  margin-bottom: var(--spacing-md);
+  text-align: justify;
+}
+
+.section-content strong {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+/* ===== SPECIES STATS ===== */
+.species-stats {
+  display: flex;
+  gap: var(--spacing-xl);
+  margin: var(--spacing-xl) 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.stat-item {
+  text-align: center;
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(46, 204, 113, 0.1));
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  min-width: 150px;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-number {
+  display: block;
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: var(--spacing-sm);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-medium);
+  font-weight: 500;
+}
+
+/* ===== ANIMAL CATEGORIES ===== */
+.animal-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.animal-category {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(46, 204, 113, 0.05));
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(76, 175, 80, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.animal-category:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.animal-category h4 {
+  color: var(--primary-green);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--primary-green);
+}
+
+/* ===== RESPONSIVE DESIGN (ENHANCED) ===== */
+@media screen and (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: 0 var(--spacing-md);
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-md);
+  }
+
+  .main-content {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .page-title {
+    font-size: var(--font-size-2xl);
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .page-header {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+
+  .tab-navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tab-btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .content-body {
+    padding: var(--spacing-lg);
+    max-height: 60vh;
+  }
+
+  .section-subtitle {
+    margin: 0 calc(-1 * var(--spacing-lg)) var(--spacing-lg);
+  }
+
+  .species-stats {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .animal-categories {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== FOOTER ===== */
+.main-footer {
+  background: var(--primary-green);
+  color: var(--white);
+  text-align: center;
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+}
+
+/* ===== FOCUS & ACCESSIBILITY ===== */
+.tab-btn:focus,
+.nav-link:focus,
+.btn-login:focus,
+.btn-register:focus {
+  outline: 2px solid var(--primary-green);
+  outline-offset: 2px;
+}

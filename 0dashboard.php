@@ -1,173 +1,147 @@
+<?php
+$site_title = "Ciremai Nikreuh";
+$navigation_items = [
+    'Info Gunung' => '1info_gunung.php',
+    'Booking' => '3booking.php',
+    'Panduan' => '4panduan.php',
+    'Blog' => '5.blog.php',
+    'Komunitas' => '6komunitas.php',
+    'Kontak' => '7kontak.php'
+];
+$weather_data = [
+    'location' => 'Jalur Apuy',
+    'temperature' => '20°C',
+    'condition' => 'Cerah Berawan',
+    'humidity' => '66%',
+    'wind_speed' => '3km/h',
+    'visibility' => '8km',
+    'rain_chance' => '16%'
+];
+$stats_data = [
+    ['icon' => 'mountain', 'value' => '3078 MDPL', 'label' => 'Ketinggian'],
+    ['icon' => 'route', 'value' => '5', 'label' => 'Jalur Resmi'],
+    ['icon' => 'users', 'value' => '10K+', 'label' => 'Pendaki/Tahun'],
+    ['icon' => 'star', 'value' => '4.8', 'label' => 'Rating']
+];
+
+function render_header($site_title, $navigation_items) {
+    echo '<header id="main-header" class="header-container">';
+    echo '<nav class="navbar-main">';
+    echo '<div class="logo-container"><div class="logo-icon">CN</div><span class="logo-text">' . $site_title . '</span></div>';
+    echo '<ul class="nav-menu">';
+    foreach($navigation_items as $name => $link) {
+        echo '<li><a href="' . $link . '" class="nav-link">' . $name . '</a></li>';
+    }
+    echo '</ul>';
+    echo '<div class="nav-buttons">';
+    echo '<a href="masuk.php" class="btn-masuk">Masuk</a>';
+    echo '<a href="daftar.php" class="btn-daftar">Daftar</a>';
+    echo '</div>';
+    echo '</nav>';
+    echo '</header>';
+}
+
+function render_hero_section($weather_data) {
+    echo '<section class="hero-section container">';
+    echo '<div class="row align-items-center">';
+
+    // Kolom kiri: Teks
+    echo '<div class="col-md-8">';
+    echo '<div class="hero-text">';
+    echo '<h1 class="hero-title">Jelajahi Keindahan</h1>';
+    echo '<h2 class="hero-subtitle">Gunung Ciremai</h2>';
+    echo '<p class="hero-description">';
+    echo 'Panduan lengkap pendakian dan eksplorasi gunung ciremai. ';
+    echo 'Portal terpercaya untuk mendapatkan informasi mendaki, booking ';
+    echo 'online, panduan lengkap, dan informasi terkini tentang ';
+    echo 'petualangan di gunung tertinggi di Jawa Barat.';
+    echo '</p>';
+    echo '<div class="hero-buttons">';
+    echo '<a href="3booking.php" class="btn-booking">📅 Booking Sekarang</a>';
+    echo '<a href="1info_gunung.php" class="btn-info">ℹ️ Info Lengkap</a>';
+    echo '</div>';
+    echo '</div>';
+    echo '</div>';
+
+    // Kolom kanan: Info Cuaca
+    echo '<div class="col-md-4">';
+    render_weather_card($weather_data);
+    echo '</div>';
+
+    echo '</div>';
+    echo '</section>';
+}
+
+
+function render_weather_card($data) {
+    echo '<div class="weather-card"><h3 class="weather-title">Info Cuaca</h3>';
+    echo '<div class="weather-location">' . $data['location'] . '</div>';
+    echo '<div class="weather-temp">' . $data['temperature'] . '</div>';
+    echo '<div class="weather-condition">☀️ ' . $data['condition'] . '</div>';
+    echo '<div class="weather-details">';
+    echo '<div class="weather-item"><span class="weather-label">Kelembapan:</span><span class="weather-value">' . $data['humidity'] . '</span></div>';
+    echo '<div class="weather-item"><span class="weather-label">Angin:</span><span class="weather-value">' . $data['wind_speed'] . '</span></div>';
+    echo '<div class="weather-item"><span class="weather-label">Visibilitas:</span><span class="weather-value">' . $data['visibility'] . '</span></div>';
+    echo '<div class="weather-item"><span class="weather-label">Curah Hujan:</span><span class="weather-value">' . $data['rain_chance'] . '</span></div>';
+    echo '</div></div>';
+}
+
+function render_stats_section($stats) {
+    echo '<div class="stats-container">';
+    foreach($stats as $stat) {
+        echo '<div class="stats-card">';
+        $icons = ['mountain' => '⛰️', 'route' => '🛤️', 'users' => '👥', 'star' => '⭐'];
+        echo '<div class="stats-icon">' . $icons[$stat['icon']] . '</div>';
+        echo '<div class="stats-value">' . $stat['value'] . '</div>';
+        echo '<div class="stats-label">' . $stat['label'] . '</div>';
+        echo '</div>';
+    }
+    echo '</div>';
+}
+
+function render_footer() {
+    echo '<footer class="footer-section"><p class="footer-text">© 2025 Jelajahi Website. All rights reserved.</p></footer>';
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portal Pendakian Gunung Ciremai - Booking online, panduan lengkap, dan informasi terkini">
-    <title>Ciremai Nikreuh - Portal Pendakian Gunung Ciremai</title>
-    
-    <!-- Bootstrap 5 CSS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portal Pendakian Gunung Ciremai - Booking online, panduan lengkap, dan informasi terkini" />
+    <title><?php echo $site_title; ?> - Dashboard</title>
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <!-- Bootstrap Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style_dasboard.css">
+    <!-- Font Poppins Google -->
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style_dasboard.css?v=1.2">
 </head>
 <body>
-     <!-- Bagian Atas Website -->
-    <header class="navbar navbar-expand-lg navbar-dark fixed-top bagian-atas">
-        <div class="container">
-            <!-- Logo dan Nama -->
-            <a href="0dashboard.html" class="navbar-brand d-flex align-items-center">
-                <img src="img/logo_CN.png" alt="logo CN" class="logo-situs">
-                <i class="bi bi-mountain fs-3 me-2"></i>
-                <span class="nama-situs">Ciremai Nikreuh</span>
-            </a>
-
-            <!-- Tombol Menu Mobile -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Menu Navigasi -->
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link link-menu" href="#info">
-                            <i class="bi bi-info-circle me-1"></i>Info Gunung
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu" href="#jalur">
-                            <i class="bi bi-map me-1"></i>Jalur
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu" href="#booking">
-                            <i class="bi bi-calendar-check me-1"></i>Booking
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu" href="#panduan">
-                            <i class="bi bi-book me-1"></i>Panduan
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu" href="#blog">
-                            <i class="bi bi-journal-text me-1"></i>Blog
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu" href="#komunitas">
-                            <i class="bi bi-people me-1"></i>Komunitas
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-menu" href="#kontak">
-                            <i class="bi bi-envelope me-1"></i>Kontak
-                        </a>
-                    </li>
-                </ul>
-
-                <!-- Tombol Login dan Daftar -->
-                <div class="d-flex gap-2">
-                    <a href="masuk.php" class="btn tombol-masuk">
-                        <i class="bi bi-box-arrow-in-right me-1"></i>
-                        <span class="d-none d-sm-inline">Login</span>
-                    </a>
-                    <a href="daftar.php" class="btn tombol-daftar">
-                        <i class="bi bi-person-plus me-1"></i>
-                        <span class="d-none d-sm-inline">Daftar</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Isi Utama Website -->
-    <main>
-        <!-- Bagian Sambutan Utama -->
-        <section class="bagian-utama">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <h1 class="display-4 judul-utama">
-                            Jelajahi Keindahan <span class="teks-biru">Gunung Ciremai</span>
-                        </h1>
-                        <p class="lead deskripsi-utama">
-                            Portal terpercaya untuk pendakian Gunung Ciremai. Booking online, panduan lengkap, dan informasi terkini untuk petualangan Anda.
-                        </p>
-                        <div class="d-flex gap-3 flex-wrap">
-                            <a href="#booking" class="btn tombol-biru btn-lg">
-                                <i class="bi bi-calendar-check me-2"></i>Booking Sekarang
-                            </a>
-                            <a href="#info" class="btn tombol-outline btn-lg">
-                                <i class="bi bi-info-circle me-2"></i>Info Lengkap
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Gambar Gunung -->
-                    <div class="col-lg-6">
-                        <div class="gambar-gunung">
-                            <div class="kotak-gunung">
-                                <i class="bi bi-mountain"></i>
-                                <p class="text-muted mb-0">Gunung Ciremai</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="page-wrapper">
+        <?php render_header($site_title, $navigation_items); ?>
+        <main class="main-content">
+    <?php render_hero_section($weather_data); ?>
+    <div class="content-container container">
+        <section class="statistics-section mt-4">
+            <?php render_stats_section($stats_data); ?>
         </section>
+    </div>
+</main>
 
-        <!-- Bagian Angka-Angka Penting -->
-        <section class="bagian-statistik">
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-6 col-md-3">
-                        <div class="kartu-statistik text-center">
-                            <i class="bi bi-mountain display-6"></i>
-                            <h3 class="angka-statistik">3,078m</h3>
-                            <p class="label-statistik">Ketinggian</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="kartu-statistik text-center">
-                            <i class="bi bi-signpost-2 display-6"></i>
-                            <h3 class="angka-statistik">5</h3>
-                            <p class="label-statistik">Jalur Pendakian</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="kartu-statistik text-center">
-                            <i class="bi bi-people display-6"></i>
-                            <h3 class="angka-statistik">10K+</h3>
-                            <p class="label-statistik">Pendaki/Tahun</p>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="kartu-statistik text-center">
-                            <i class="bi bi-star-fill display-6"></i>
-                            <h3 class="angka-statistik">4.8</h3>
-                            <p class="label-statistik">Rating</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        <?php render_footer(); ?>
+    </div>
 
-    <!-- Bagian Bawah Website -->
-    <footer class="bagian-bawah">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0">&copy; 2024 Ciremai Nikreuh. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            header.classList.toggle('header-scrolled', window.pageYOffset > 100);
+        });
+    </script>
 
-    <!-- Bootstrap JavaScript -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
 </html>
