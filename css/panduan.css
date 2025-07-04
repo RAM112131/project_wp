@@ -1,0 +1,412 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Colors */
+  --primary-green: #4caf50;
+  --secondary-green: #2ecc71;
+  --light-green: #81c784; 
+  --accent-green: #388e3c;
+  --text-dark: #1f2937;
+  --text-medium: #4b5563;
+  --text-light: #6b7280;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e5e7eb; 
+  --dark-gray: #9ca3af;
+
+  --easy-color: #22c55e;
+  --medium-color: #f59e0b;
+  --hard-color: #ef4444;
+
+  --font-family: "Poppins", sans-serif;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--white);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex; 
+  flex-direction: column; 
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  font-size: 28px;
+  color: var(--primary-green);
+}
+
+.logo-text {
+  color: var(--primary-green);
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-family);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-item {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: var(--font-family);
+}
+
+.nav-item:hover {
+  color: var(--primary-green);
+}
+
+.nav-item.active {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+.nav-item::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-green);
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 100%;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-login {
+  padding: 10px 24px;
+  border: 2px solid var(--primary-green);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--primary-green);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  font-size: 14px;
+}
+
+.btn-login:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-register {
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--primary-green);
+  color: var(--white);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  font-size: 14px;
+}
+
+.btn-register:hover {
+  background: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+
+/* ===== FOOTER (ESSENTIAL) ===== */
+.footer {
+  background: var(--text-dark);
+  color: var(--white);
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.footer-text {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ===== RESPONSIVE DESIGN (ESSENTIAL FOR HEADER/FOOTER) ===== */
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .container {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .nav-menu {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* .container for header/footer */
+  .container {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .nav-item {
+    font-size: 14px;
+  }
+
+  .btn-login,
+  .btn-register {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}
+
+
+.container-content { 
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.main-page-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl); 
+    padding-top: var(--spacing-xl);
+}
+
+.main-page-title {
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md); 
+}
+
+.main-page-subtitle {
+    font-size: 1.1rem; 
+    color: var(--text-medium);
+    font-weight: 400; 
+}
+.btn-tab {
+    display: flex; 
+    align-items: center;
+    gap: 8px; 
+    border-radius: var(--radius-xl);
+    padding: 12px 24px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-family);
+    font-size: 14px;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap; 
+    border: 2px solid var(--medium-gray);
+    background: var(--white); 
+    color: var(--text-medium);
+    box-shadow: none; 
+}
+
+.btn-tab.active-tab {
+    border-color: var(--primary-green);
+    background: var(--primary-green);
+    color: var(--white);
+    box-shadow: var(--shadow-lg); 
+}
+
+.btn-tab:not(.active-tab):hover {
+    border-color: black;
+    background: var(--primary-green);
+    color: var(--white); 
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-tab.active-tab:hover {
+    background: var(--accent-green); 
+    box-shadow: var(--shadow-xl); 
+    transform: translateY(-1px); 
+}
+
+@media (max-width: 768px) {
+    .tab-navigation-container {
+        justify-content: center; 
+    }
+    .btn-tab {
+        padding: 10px 18px; 
+        font-size: 13px; 
+    }
+}
+
+.card-custom {
+    background-color: var(--light-gray); 
+    border-radius: var(--radius-xl); 
+    padding: var(--spacing-xl); 
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid var(--medium-gray); 
+    box-shadow: var(--shadow-md);
+}
+.card-custom h4 {
+    color: var(--text-dark); 
+    font-weight: 600; 
+    margin-bottom: var(--spacing-lg); 
+}
+.card-custom ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+.card-custom ul li {
+    margin-bottom: var(--spacing-sm); 
+    color: var(--text-medium); 
+    display: flex; 
+    align-items: flex-start;
+    gap: 5px; 
+}
+.card-custom ul li .bi-dot {
+    font-size: 1.5em; 
+    line-height: 1;
+    color: var(--primary-green); 
+}
+
+.schedule-card {
+    background-color: var(--light-gray);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+    border: 1px solid var(--medium-gray);
+    box-shadow: var(--shadow-md);
+}
+.schedule-card h4 {
+    color: var(--text-dark);
+    font-weight: 600;
+    margin-bottom: var(--spacing-lg);
+}
+.schedule-item {
+    display: flex;
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.95rem;
+}
+.schedule-time {
+    flex: 0 0 100px; /* Fixed width for time */
+    font-weight: 600;
+    color: var(--text-dark);
+}
+.schedule-description {
+    flex-grow: 1;
+    color: var(--text-medium);
+}
+
+.main-content-wrapper {
+    flex-grow: 1; 
+    padding: var(--spacing-2xl) 0;
+}
+
+
+@media (max-width: 1024px) {
+    .container-content {
+        padding: 0 16px; 
+    }
+}
+@media (max-width: 768px) {
+    .main-page-title {
+        font-size: 1.8rem;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+}
+@media (max-width: 480px) {
+    .main-page-title {
+        font-size: 1.5rem;
+    }
+    .card-custom, .schedule-card {
+        padding: var(--spacing-lg);
+    }
+}
+

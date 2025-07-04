@@ -1,13 +1,15 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "pendakian_ciremai";
 
-$db_host = "localhost";
-$db_user = "root";
-$db_pass = "";
-$db_name = "pendakian_ciremai";
+// Buat koneksi
+$koneksi = new mysqli($servername, $username, $password, $dbname);
 
-$connection = mysqli_connect(hostname: $db_host, username: $db_user, password: $db_pass, database: $db_name);
-
-if(!$connection){
-    echo "Koneksi Gagal! :". mysqli_connect_error();
+// Cek koneksi
+if ($koneksi->connect_error) {
+    die("Koneksi gagal: " . $koneksi->connect_error);
 }
+// echo "Koneksi berhasil";
 ?>

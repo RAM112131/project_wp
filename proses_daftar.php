@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if (empty($errors)) {
-        $check_username = mysqli_prepare($connection, "SELECT id FROM users WHERE username = ?");
+        $check_username = mysqli_prepare($koneksi, "SELECT id FROM users WHERE username = ?");
         mysqli_stmt_bind_param($check_username, "s", $username);
         mysqli_stmt_execute($check_username);
         $result = mysqli_stmt_get_result($check_username);
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     if (empty($errors)) {
-        $check_email = mysqli_prepare($connection, "SELECT id FROM users WHERE email = ?");
+        $check_email = mysqli_prepare($koneksi, "SELECT id FROM users WHERE email = ?");
         mysqli_stmt_bind_param($check_email, "s", $email);
         mysqli_stmt_execute($check_email);
         $result = mysqli_stmt_get_result($check_email);
@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         
-        $insert_query = mysqli_prepare($connection, "INSERT INTO users (username, nama_lengkap, no_hp, email, password) VALUES (?, ?, ?, ?, ?)");
+        $insert_query = mysqli_prepare($koneksi, "INSERT INTO users (username, nama_lengkap, no_hp, email, password) VALUES (?, ?, ?, ?, ?)");
         
         if ($insert_query) {
             mysqli_stmt_bind_param($insert_query, "sssss", $username, $nama_lengkap, $no_hp, $email, $hashed_password);
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </script>";
     }
     
-    mysqli_close($connection);
+    mysqli_close($koneksi);
 } else {
     header("Location: daftar.html");
     exit();

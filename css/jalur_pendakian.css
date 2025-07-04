@@ -1,0 +1,631 @@
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Colors - Updated sesuai spesifikasi */
+  --primary-green: #4caf50;
+  --secondary-green: #2ecc71;
+  --light-green: #81c784;
+  --accent-green: #388e3c;
+  --text-dark: #1f2937;
+  --text-medium: #4b5563;
+  --text-light: #6b7280;
+  --white: #ffffff;
+  --light-gray: #f8f9fa;
+  --medium-gray: #e5e7eb;
+  --dark-gray: #9ca3af;
+
+  /* Difficulty Badge Colors */
+  --easy-color: #22c55e;
+  --medium-color: #f59e0b;
+  --hard-color: #ef4444;
+
+  /* Typography */
+  --font-family: "Poppins", sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Import Google Fonts - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--white);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  font-size: 28px;
+  color: var(--primary-green);
+}
+
+.logo-text {
+  color: var(--primary-green);
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-family);
+}
+
+/* Navigation Menu */
+.nav-menu {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-item {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 8px 0;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: var(--font-family);
+}
+
+.nav-item:hover {
+  color: var(--primary-green);
+}
+
+.nav-item.active {
+  color: var(--primary-green);
+  font-weight: 600;
+}
+
+/* Hover effect untuk navigation */
+.nav-item::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-green);
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after,
+.nav-item.active::after {
+  width: 100%;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn-login {
+  padding: 10px 24px;
+  border: 2px solid var(--primary-green);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  color: var(--primary-green);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  font-size: 14px;
+}
+
+.btn-login:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-register {
+  padding: 10px 24px;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--primary-green);
+  color: var(--white);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  font-size: 14px;
+}
+
+.btn-register:hover {
+  background: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  padding: var(--spacing-2xl) 0;
+  min-height: calc(100vh - 200px);
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.mountain-icon {
+  font-size: 2.5rem;
+  color: var(--primary-green);
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-medium);
+  font-weight: 400;
+}
+
+/* ===== TAB NAVIGATION ===== */
+.tab-navigation {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px 24px;
+  border: 2px solid var(--medium-gray);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+  color: var(--text-medium);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  font-size: 14px;
+}
+
+.tab-btn:hover {
+  border-color: var(--primary-green);
+  color: var(--primary-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.tab-btn.active {
+  border-color: var(--primary-green);
+  background: var(--primary-green);
+  color: var(--white);
+  box-shadow: var(--shadow-lg);
+}
+
+.tab-btn span {
+  font-size: 16px;
+}
+
+/* ===== CONTENT SECTION ===== */
+.content-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.section-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.section-icon {
+  font-size: 2rem;
+  color: var(--primary-green);
+}
+
+.content-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--medium-gray);
+}
+
+/* ===== TRAIL CARDS ===== */
+.trail-card {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  background: var(--light-gray);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--medium-gray);
+  transition: all 0.3s ease;
+}
+
+.trail-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-green);
+}
+
+.trail-card:last-of-type {
+  margin-bottom: 0;
+}
+
+.trail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+}
+
+.trail-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+/* Difficulty Badges */
+.difficulty-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.difficulty-badge.easy {
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--easy-color);
+  border: 1px solid var(--easy-color);
+}
+
+.difficulty-badge.medium {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--medium-color);
+  border: 1px solid var(--medium-color);
+}
+
+.difficulty-badge.hard {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--hard-color);
+  border: 1px solid var(--hard-color);
+}
+
+/* Trail Details */
+.trail-details {
+  margin-bottom: var(--spacing-lg);
+}
+
+.detail-item {
+  margin-bottom: var(--spacing-sm);
+  font-size: 14px;
+  color: var(--text-medium);
+  line-height: 1.5;
+}
+
+.detail-item strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Trail Buttons */
+.trail-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.btn-booking,
+.btn-maps {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 12px 20px;
+  border-radius: var(--radius-lg);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  font-size: 14px;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-booking {
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+.btn-booking:hover {
+  background: var(--accent-green);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-maps {
+  background: var(--white);
+  color: var(--primary-green);
+  border: 2px solid var(--primary-green);
+}
+
+.btn-maps:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-icon {
+  font-size: 16px;
+}
+
+/* Trail Image Placeholder */
+.trail-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, var(--light-green), var(--primary-green));
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+  padding: var(--spacing-lg);
+}
+
+.image-text {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.image-subtext {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* ===== INFO BOX ===== */
+.info-box {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(46, 204, 113, 0.05));
+  border: 1px solid var(--primary-green);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
+}
+
+.info-box h3 {
+  color: var(--primary-green);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-box li {
+  margin-bottom: var(--spacing-md);
+  padding-left: var(--spacing-lg);
+  position: relative;
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+
+.info-box li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+  font-weight: bold;
+}
+
+.info-box li strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background: var(--text-dark);
+  color: var(--white);
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  margin-top: auto;
+}
+
+.footer-text {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .nav-menu {
+    gap: 24px;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+  }
+
+  .trail-card {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .header .container {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .nav-menu {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .tab-navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tab-btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+
+  .trail-buttons {
+    flex-direction: column;
+  }
+
+  .btn-booking,
+  .btn-maps {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .nav-item {
+    font-size: 14px;
+  }
+
+  .btn-login,
+  .btn-register {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .trail-card {
+    padding: var(--spacing-lg);
+  }
+
+  .trail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .image-placeholder {
+    height: 150px;
+  }
+
+  .info-box {
+    padding: var(--spacing-lg);
+  }
+}
