@@ -1,181 +1,293 @@
+<?php
+session_start();
+// Memanggil file koneksi database. Asumsikan file ini akan membuat variabel $koneksi.
+include 'koneksi.php'; 
+
+$error = ''; // Variabel untuk menyimpan pesan error
+
+// Pastikan variabel $koneksi sudah ada dan merupakan objek mysqli
+// Ini untuk mencegah error Fatal error jika koneksi.php gagal atau tidak mendefinisikan $koneksi
+if (!isset($koneksi) || !$koneksi instanceof mysqli) {
+    // Jika koneksi tidak ada atau tidak valid, set pesan error dan hentikan eksekusi
+    $error = 'Koneksi database gagal atau tidak ditemukan. Mohon periksa file koneksi.php Anda.';
+}
+
+// Hanya proses jika tidak ada error koneksi database
+if (empty($error) && $_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if (empty($email) || empty($password)) {
+        $error = 'Semua field harus diisi.';
+    } else {
+        // Menggunakan variabel $koneksi yang diasumsikan dari koneksi.php
+        $stmt = mysqli_prepare($koneksi, "SELECT id, username, nama_lengkap, email, password FROM users WHERE email = ?"); 
+        
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "s", $email);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            if ($result && mysqli_num_rows($result) === 1) {
+                $user = mysqli_fetch_assoc($result);
+                // Memverifikasi password yang dimasukkan dengan hash di database
+                if (password_verify($password, $user['password'])) {
+                    // Login berhasil, setel variabel sesi
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['email'] = $user['email'];
+                    $_SESSION['nama_lengkap'] = $user['nama_lengkap']; 
+                    
+                    // Redirect ke halaman dashboard
+                    header("Location: 0dashboard.php");
+                    exit(); // Penting: selalu panggil exit() setelah header()
+                } else {
+                    $error = "Password salah!";
+                }
+            } else {
+                $error = "Email tidak ditemukan!";
+            }
+            mysqli_stmt_close($stmt); // Tutup statement setelah selesai
+        } else {
+            $error = "Terjadi kesalahan saat menyiapkan query: " . mysqli_error($koneksi);
+        }
+    }
+}
+
+// Pastikan koneksi ditutup hanya jika sudah dibuka dan tidak ada error
+if (isset($koneksi) && $koneksi instanceof mysqli && empty($error)) {
+    mysqli_close($koneksi);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login ke Portal Pendakian Gunung Ciremai">
-    <title>Login - Ciremai Nikreuh</title>
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style_CN.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In - Alas Jiwa</title>
+
+    <link rel="stylesheet" href="./css/masuk.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* Styling untuk tombol Sign In dari form manual */
+        .signin-btn {
+            width: 100%; 
+            padding: 12px 20px; 
+            font-size: 1rem; 
+            /* ... gaya lain dari masuk.css ... */
+        }
+
+        .google-btn-custom {
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            font-weight: 500;
+            padding: 12px 20px; 
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            gap: 10px; 
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem; 
+            width: 100%; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .google-btn-custom:hover {
+            background-color: #f5f5f5;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .google-btn-custom img {
+            width: 20px; 
+            height: 20px; 
+        }
+
+        /* CSS tambahan untuk divider "Atau" */
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0; 
+            color: #777; 
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #eee; 
+        }
+
+        .divider:not(:empty)::before {
+            margin-right: .5em;
+        }
+
+        .divider:not(:empty)::after {
+            margin-left: .5em;
+        }
+
+        /* Pastikan .login-container memiliki padding dan max-width yang tepat */
+        .login-container {
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            /* ... gaya lain dari masuk.css ... */
+        }
+
+        /* Gaya untuk error message */
+        .error-message {
+            color: #dc3545; 
+            background-color: #f8d7da; 
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-    <!-- Close Button -->
-    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1050;">
-        <a href="0dashboard.html" class="btn btn-light btn-sm rounded-circle shadow" title="Kembali ke Dashboard">
-            <i class="bi bi-x-lg"></i>
-        </a>
-    </div>
-
-    <!-- Login Section -->
-    <main class="py-5 min-vh-100 d-flex align-items-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-5">
-                    <!-- Brand Section -->
-                    <div class="text-center mb-4">
-                        <a href="0dashboard.html" class="text-decoration-none">
-                            <div class="d-flex align-items-center justify-content-center mb-2">
-                                <img src="img/logo_CN.png" alt="logo CN" class="logo me-2" style="height: 40px;">
-                                <i class="bi bi-mountain fs-2 text-primary me-2"></i>
-                                <span class="h4 text-dark mb-0">Ciremai Nikreuh</span>
-                            </div>
-                        </a>
-                        <p class="text-muted">Portal Pendakian Gunung Ciremai</p>
-                    </div>
-
-                    <div class="card shadow">
-                        <div class="card-header text-center bg-primary text-white">
-                            <h4 class="mb-0">
-                                <i class="bi bi-box-arrow-in-right me-2"></i>Login ke Akun Anda
-                            </h4>
-                        </div>
-                        <div class="card-body p-4">
-                            <form id="loginForm">
-                                <div class="mb-3">
-                                    <label for="loginEmail" class="form-label">
-                                        <i class="bi bi-envelope me-1"></i>Email
-                                    </label>
-                                    <input type="email" class="form-control" id="loginEmail" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="loginPassword" class="form-label">
-                                        <i class="bi bi-lock me-1"></i>Password
-                                    </label>
-                                    <input type="password" class="form-control" id="loginPassword" required>
-                                </div>
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">
-                                        Ingat saya selama 30 hari
-                                    </label>
-                                </div>
-                                <button type="submit" class="btn btn-primary w-100 mb-3">
-                                    <i class="bi bi-check-circle me-2"></i>Masuk
-                                </button>
-                            </form>
-                            
-                            <div class="text-center">
-                                <p class="mb-2">Belum punya akun? 
-                                    <a href="daftar.html" class="text-decoration-none">
-                                        Daftar sekarang
-                                    </a>
-                                </p>
-                                <p class="mb-0">
-                                    <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
-                                        Lupa password?
-                                    </button>
-                                </p>
-                            </div>
-                        </div>
+    <div class="container">
+        <div class="left-section">
+            <div class="welcome-glass">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">
+                        Welcome To <br /><strong>Ciremai</strong>
+                    </h1>
+                    <p class="welcome-description">
+                        Di alam, kita tidak hanya menemukan jarak.<br />
+                        Kita menemukan diri kita sendiri.<br />
+                        Temukan alam, makna, dan jiwa bersama mereka<br />
+                        yang juga sedang berjalan seperti kamu.
+                    </p>
+                    <div style="margin-top: 40px">
+                        <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem">
+                            Don't have an account?
+                        </span>
+                        <a href="daftar.php" class="account-link">Create an account</a>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
 
-    <!-- Forgot Password Modal -->
-    <div class="modal fade" id="forgotPasswordModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="bi bi-key me-2"></i>Reset Password
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="right-section">
+            <div class="login-container">
+                <div class="login-header">
+                    <h2 class="login-title">Sign In</h2>
                 </div>
-                <div class="modal-body">
-                    <div class="alert alert-info">
-                        <i class="bi bi-info-circle me-2"></i>
-                        Masukkan email Anda dan kami akan mengirimkan link untuk reset password.
+
+                <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" id="loginForm">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                            placeholder="Enter your email"
+                            value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" 
+                            required 
+                        />
                     </div>
-                    <form id="resetPasswordForm">
-                        <div class="mb-3">
-                            <label for="resetEmail" class="form-label">
-                                <i class="bi bi-envelope me-1"></i>Email
-                            </label>
-                            <input type="email" class="form-control" id="resetEmail" required>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="password-container">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                placeholder="Enter password" 
+                                required 
+                            />
+                            <button type="button" class="show-password" onclick="togglePassword()">Show password</button>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">
-                            <i class="bi bi-send me-2"></i>Kirim Link Reset
-                        </button>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <div class="text-center">
-                        <p class="mb-0">Ingat password? 
-                            <button type="button" class="btn btn-link p-0" data-bs-dismiss="modal">
-                                Kembali ke login
-                            </button>
-                        </p>
                     </div>
-                </div>
+
+                    <?php if (!empty($error)): ?>
+                        <div class="error-message">
+                            <?= htmlspecialchars($error); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <button type="submit" class="signin-btn">Sign In</button>
+                </form>
+
+                <div class="divider"><span>Atau</span></div>
+
+                <button type="button" class="google-btn-custom" onclick="signInWithGoogle()">
+                    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" /> Sign in with Google
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer mt-auto">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0">&copy; 2024 Ciremai Nikreuh. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    
     <script>
-        // Handle login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const remember = document.getElementById('rememberMe').checked;
-            
-            // Simple validation (you can expand this)
-            if (email && password) {
-                // Here you would typically send data to your backend
-                alert('Login berhasil! (Demo)');
-                // Redirect to dashboard
-                window.location.href = '0dashboard.html';
+        function togglePassword() {
+            const pass = document.getElementById("password");
+            const btn = document.querySelector(".show-password");
+            if (pass.type === "password") {
+                pass.type = "text";
+                btn.textContent = "Hide password";
             } else {
-                alert('Mohon lengkapi semua field!');
+                pass.type = "password";
+                btn.textContent = "Show password";
             }
-        });
+        }
+    </script>
 
-        // Handle forgot password form submission
-        document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('resetEmail').value;
-            
-            if (email) {
-                alert('Link reset password telah dikirim ke email Anda! (Demo)');
-                // Close modal
-                bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal')).hide();
-            } else {
-                alert('Mohon masukkan email Anda!');
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+        import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBOZo6R-FAF3KdoC3Xw28F6RiWL4qfx7XY",
+            authDomain: "webproject-5f104.firebaseapp.com",
+            projectId: "webproject-5f104",
+            storageBucket: "webproject-5f104.appspot.com",
+            messagingSenderId: "300144113544",
+            appId: "1:300144113544:web:f35663fbf07deec1496c3d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.signInWithGoogle = async function () {
+            try {
+                const provider = new GoogleAuthProvider();
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user; 
+
+                // Mengirim email dan nama pengguna ke PHP
+                const res = await fetch('google_auth_callback.php', { // <-- PASTIKAN NAMA FILE INI BENAR (sesuai diskusi sebelumnya)
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: user.email,
+                        displayName: user.displayName || user.email, 
+                        credential: user.stsTokenManager.accessToken // Mengirim ID Token untuk verifikasi di backend PHP
+                    })
+                });
+
+                const data = await res.json();
+                if (data.status === 'success') {
+                    window.location.href = data.redirect || '0dashboard.php'; // Menggunakan 'redirect' dari respon PHP
+                } else {
+                    alert("Gagal login Google: " + data.message);
+                    console.error("DETAIL GOOGLE LOGIN:", data.detail || data.message); 
+                }
+
+            } catch (error) {
+                console.error("Google Login Error:", error);
+                alert("Google Login Error: " + error.message);
             }
-        });
+        };
     </script>
 </body>
 </html>

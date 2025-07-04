@@ -1,35 +1,28 @@
+<?php
+// Pastikan file components.php di-include untuk menggunakan fungsi render_header dan render_footer
+include 'components.php'; 
+
+// Jika perlu sesi, tambahkan session_start() di sini
+// session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hubungi Kami</title>
+    <title>Hubungi Kami - <?php echo htmlspecialchars($site_title); ?></title>
     <link rel="stylesheet" href="./css/kontak.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <span class="logo-icon">🏔️</span>
-                <span class="logo-text">Judul Website</span>
-            </div>
-            <nav class="nav-menu">
-                <a href="#" class="nav-item">Info Gunung</a>
-                <a href="#" class="nav-item">Booking</a>
-                <a href="#" class="nav-item active">Panduan</a> <a href="#" class="nav-item">Blog</a>
-                <a href="#" class="nav-item">Komunitas</a>
-                <a href="#" class="nav-item">Kontak</a>
-            </nav>
-            <div class="auth-buttons">
-                <button class="btn-login">Masuk</button>
-                <button class="btn-register">Daftar</button>
-            </div>
-        </div>
-    </header>
+    <?php
+    // Memanggil fungsi render_header dari components.php
+    // Ini akan otomatis menampilkan navigasi dan tombol auth sesuai definisi
+    // di components.php. Link 'Kontak' akan otomatis aktif.
+    render_header($site_title, $navigation_items); 
+    ?>
 
-    <!-- Main Container -->
     <div class="main-container">
-        <!-- Page Header -->
         <div class="page-header">
             <h1>
                 <span class="page-header-icon">✉️</span>
@@ -38,7 +31,6 @@
             <p>Kami senang Anda ingin terhubung! Apakah Anda memiliki pertanyaan, ingin merencanakan pendakian, atau sekadar berbagi pengalaman? Tim kami siap membantu.</p>
         </div>
 
-        <!-- Contact Form Section -->
         <div class="content-section">
             <div class="contact-form">
                 <div class="section-title">Kirim Pesan Kepada Kami</div>
@@ -84,7 +76,6 @@
                 </form>
             </div>
 
-            <!-- Direct Contact Info -->
             <div class="contact-langsung">
                 <div class="contact-langsung-content">
                     <h3>Kontak Langsung</h3>
@@ -106,32 +97,31 @@
                         <div class="contact-icon">📍</div>
                         <div class="contact-details">
                             <h4>Kantor Pusat:</h4>
-                            <p>Jl. Raya Palutungan No. 123, Desa Palutungan,<br>Kuningan, Jawa Barat 45571<br><a href="#" style="color: #0066ff;">lihat google maps</a></p>
+                            <p>Jl. Raya Palutungan No. 123, Desa Palutungan,<br>Kuningan, Jawa Barat 45571<br><a href="https://maps.app.goo.gl/YOUR_Maps_LINK_HERE" target="_blank" style="color: #0066ff;">lihat google maps</a></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Map Section -->
             <div class="lokasi-kami">
                 <div class="lokasi-kami-content">
                     <h3>Lokasi Kami</h3>
                     <div class="map-placeholder">
-                        foo maps lokasi
+                        [Embed Google Maps Anda di sini]
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Social Media Section -->
         <div class="tetap-terhubung">
             <div class="tetap-terhubung-content">
                 <h3>Tetap Terhubung Dengan Kami</h3>
                 <p>Ikuti kami di media sosial untuk mendapatkan informasi terbaru, tips pendakian, dan inspirasi visual dari keindahan Gunung Ciremai!</p>
+                <div class="social-icons">
+                    </div>
             </div>
         </div>
 
-        <!-- Final Message Section -->
         <div class="final-message">
             <div class="final-message-content">
                 <h3>Kami Menantikan Pesan Anda!</h3>
@@ -140,10 +130,10 @@
         </div>
     </div>
 
-    <!-- Copyright -->
-    <div class="copyright">
-        © 2025 Judul Website. All rights reserved
-    </div>
+    <?php
+    // Memanggil fungsi render_footer dari components.php
+    render_footer();
+    ?>
 
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
@@ -159,7 +149,7 @@
                 return;
             }
             
-            // Simulate form submission
+            // Simulate form submission (Anda bisa mengganti ini dengan AJAX request ke backend PHP)
             alert('Terima kasih! Pesan Anda telah dikirim. Kami akan segera menghubungi Anda dalam 1-2x24 jam.');
             this.reset();
         });

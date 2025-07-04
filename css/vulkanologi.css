@@ -1,0 +1,737 @@
+/* ===== CSS VARIABLES (UPDATED) ===== */
+:root {
+  /* Colors - Updated sesuai spesifikasi */
+  --primary-green: #4caf50; /* Primary color hijau */
+  --secondary-green: #2ecc71; /* Secondary hijau */
+  --light-green: #81c784; /* Light green untuk highlight/background halus */
+  --accent-green: #388e3c; /* Dark green untuk accent */
+  --text-dark: #1f2937;
+  --text-medium: #4b5563;
+  --text-light: #6b7280;
+  --white: #ffffff; /* Background utama putih */
+  --light-gray: #f8f9fa; /* Light gray untuk subtle background */
+  --medium-gray: #e5e7eb;
+  --dark-gray: #9ca3af;
+
+  /* Volcano Theme Colors - Disimpan, tapi penggunaannya disesuaikan */
+  --volcano-red: #ef4444;
+  --volcano-orange: #f97316;
+  --volcano-yellow: #eab308;
+
+  /* Glassmorphism Variables - DITAMBAHKAN/DIUPDATE untuk konsistensi */
+  --glass-bg: rgba(255, 255, 255, 0.5); /* Opasitas lebih tinggi agar lebih terlihat */
+  --glass-bg-strong: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.6); /* Border lebih terlihat */
+  --glass-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.15); /* Shadow lebih menonjol */
+  --glass-blur: 20px; /* Peningkatan blur */
+
+  /* Typography */
+  --font-family: "Poppins", sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem; /* Untuk judul halaman utama */
+  --font-size-4xl: 2.5rem; /* Untuk judul halaman yang sangat besar */
+
+  /* Spacing */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-2xl: 3rem; /* 48px */
+  --spacing-3xl: 4rem; /* 64px */
+
+  /* Border Radius */
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.5rem; /* 8px */
+  --radius-lg: 0.75rem; /* 12px */
+  --radius-xl: 1rem; /* 16px */
+  --radius-2xl: 1.5rem; /* 24px */
+  --radius-full: 50%;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--light-gray); /* Mengubah background body menjadi light-gray */
+  color: var(--text-dark);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Background gradient untuk header agar glassmorphism lebih terlihat */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  /* Gradien hijau yang sangat samar untuk mendukung glassmorphism */
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(46, 204, 113, 0.07)); /* Opasitas lebih tinggi */
+  z-index: -1;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+/* ===== HEADER STYLES - GLASSMORPHISM ===== */
+.main-header {
+  /* Corrected from .header to .main-header */
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--glass-border);
+  padding: var(--spacing-md) 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--glass-shadow);
+}
+
+.main-header .header-content {
+  /* Corrected from .header .container */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--spacing-lg); /* Add padding to content inside header */
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.logo-icon {
+  /* Corrected from .logo-circle */
+  font-size: var(--font-size-xl); /* Adjusted icon size */
+  color: var(--primary-green); /* Made icon color green */
+}
+
+/* .logo-circle removed as it's not used in HTML structure */
+/* .logo-circle::after removed */
+
+.logo-text {
+  color: var(--primary-green);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  font-family: var(--font-family);
+}
+
+/* Navigation Menu */
+.main-nav {
+  /* Corrected from .nav-menu */
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.nav-link.nav-item {
+  /* Target both classes */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-dark);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link.nav-item:hover {
+  color: var(--primary-green);
+  background: rgba(76, 175, 80, 0.08);
+}
+
+.nav-link.nav-item.active {
+  color: var(--primary-green);
+  background: rgba(76, 175, 80, 0.12);
+  font-weight: 600;
+}
+
+/* .nav-icon is not explicitly used in HTML now, but kept if needed for future icons */
+/* .nav-icon {
+    font-size: var(--font-size-base);
+} */
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.auth-btn {
+  /* Corrected from .auth-btn */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--primary-green);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--primary-green);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  white-space: nowrap;
+}
+
+.auth-btn:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.auth-buttons .auth-btn:last-child {
+  /* Target the last button for register style */
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+.auth-buttons .auth-btn:last-child:hover {
+  background: var(--accent-green);
+}
+
+/* .auth-icon is not explicitly used in HTML now */
+/* .auth-icon {
+    font-size: var(--font-size-sm);
+} */
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  padding: var(--spacing-3xl) 0;
+  min-height: calc(100vh - 120px);
+  flex-grow: 1;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(46, 204, 113, 0.03));
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(76, 175, 80, 0.1);
+  box-shadow: var(--shadow-sm);
+}
+
+.page-title {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.mountain-icon {
+  font-size: var(--font-size-4xl);
+  color: var(--primary-green);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--text-medium);
+  font-weight: 400;
+}
+
+/* ===== TAB NAVIGATION ===== */
+.tab-navigation {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: var(--spacing-sm) 0;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--radius-xl);
+  background: var(--white);
+  color: var(--text-medium);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.tab-btn:hover {
+  border-color: var(--primary-green);
+  color: var(--primary-green);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.tab-btn.active {
+  border-color: var(--primary-green);
+  background: var(--primary-green);
+  color: var(--white);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+/* .tab-icon is not explicitly used in HTML now */
+/* .tab-icon {
+    font-size: var(--font-size-base);
+} */
+
+/* ===== CONTENT SECTION (Refined) ===== */
+.content-container {
+  background: var(--white); /* Main container background */
+  border-radius: var(--radius-2xl); /* Rounded corners for the entire content block */
+  box-shadow: var(--shadow-lg); /* More prominent shadow for the main block */
+  padding: var(--spacing-xl) var(--spacing-2xl); /* Padding inside the content container */
+  border: 1px solid var(--light-gray);
+}
+
+.content-header {
+  text-align: center; /* Center align the main section title */
+  margin-bottom: var(--spacing-2xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px dashed var(--medium-gray); /* A subtle dashed line */
+}
+
+.section-title {
+  font-size: var(--font-size-3xl); /* Larger font for main section title */
+  font-weight: 700;
+  color: var(--primary-green); /* Main section title in primary green */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title and icon */
+  gap: var(--spacing-md);
+}
+
+.section-icon {
+  font-size: var(--font-size-3xl); /* Icon size matches title */
+  color: var(--primary-green);
+  animation: pulse 2s infinite;
+}
+
+.content-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl); /* Space between info sections */
+}
+
+.info-section {
+  background: var(--white); /* Individual info section background */
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--medium-gray);
+  transition: all 0.3s ease;
+}
+
+.info-section:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-green);
+}
+
+.section-subtitle {
+  /* Styles for Vegetasi and Margasatwa titles */
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  padding-bottom: var(--spacing-sm);
+}
+
+.section-subtitle::after {
+  /* Underline for subtitles */
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px; /* Short underline */
+  height: 3px;
+  background: var(--secondary-green);
+  border-radius: var(--radius-sm);
+}
+
+.section-content p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-medium);
+  font-size: var(--font-size-base);
+}
+
+.section-content strong {
+  color: var(--text-dark);
+}
+
+/* List styles */
+.vegetation-list,
+.habitat-list,
+.animal-categories ul {
+  list-style: none; /* Remove default bullets */
+  padding-left: 0;
+  margin-bottom: var(--spacing-md);
+}
+
+.vegetation-list li,
+.habitat-list li,
+.animal-categories ul li {
+  position: relative;
+  padding-left: var(--spacing-lg); /* Space for custom bullet */
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-medium);
+  font-size: var(--font-size-base);
+}
+
+.vegetation-list li::before,
+.habitat-list li::before,
+.animal-categories ul li::before {
+  content: "•"; /* Custom bullet point */
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  line-height: 1; /* Align with text */
+}
+
+/* Specific styling for nested strong tags in habitat list */
+.habitat-list li strong {
+  display: block; /* Make strong tags appear on their own line */
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-dark);
+  font-size: var(--font-size-lg);
+}
+
+/* Species Stats */
+.species-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: var(--light-green); /* Light green background for stats */
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+  gap: var(--spacing-md); /* Gap between items */
+}
+
+.stat-item {
+  text-align: center;
+  min-width: 120px; /* Ensure items don't get too small */
+}
+
+.stat-number {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--accent-green); /* Darker green for numbers */
+  display: block;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* Animal Categories */
+.animal-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-lg);
+}
+
+.animal-category {
+  background: var(--white);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.animal-category h4 {
+  font-size: var(--font-size-xl);
+  color: var(--primary-green);
+  margin-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--light-green); /* Underline for category title */
+  padding-bottom: var(--spacing-xs);
+}
+
+.animal-category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.animal-category ul li {
+  font-size: var(--font-size-base);
+  color: var(--text-medium);
+  margin-bottom: var(--spacing-sm);
+}
+
+.animal-category ul li::before {
+  content: "🪶"; /* Custom icon for animal lists */
+  font-size: var(--font-size-base);
+  color: var(--secondary-green);
+  margin-right: var(--spacing-xs);
+}
+
+/* ===== GALLERY SECTION ===== */
+.gallery-section {
+  margin-top: var(--spacing-2xl);
+  text-align: center;
+}
+
+.gallery-section .section-subtitle {
+  /* Re-use section-subtitle style */
+  margin-bottom: var(--spacing-xl);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  justify-content: center;
+}
+
+.gallery-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--medium-gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-lg);
+}
+
+.gallery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-green);
+}
+
+.gallery-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Maintain aspect ratio for placeholder */
+  background: var(--light-gray);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-md);
+  border: 2px dashed var(--dark-gray);
+  color: var(--dark-gray);
+  font-size: var(--font-size-base);
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.gallery-icon {
+  font-size: var(--font-size-3xl); /* Large icon for placeholder */
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-green);
+}
+
+.gallery-card h4 {
+  font-size: var(--font-size-lg);
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-top: 0;
+}
+
+/* ===== ANIMATIONS & MICRO-INTERACTIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Apply animation delays consistently */
+.timeline-item, /* Keeping these in case they are used in other pages */
+.info-card,
+.info-section, /* Apply to info sections */
+.gallery-card {
+  /* Apply to gallery cards */
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-fill-mode: both;
+  animation-timing-function: ease-out;
+}
+
+/* Specific delays for sections and cards to make them appear smoothly */
+.info-section:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.info-section:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.gallery-card:nth-child(1) {
+  animation-delay: 0.3s;
+}
+.gallery-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+/* Volcano emoji animation - tetap dipertahankan */
+.section-icon.volcano-icon {
+  /* Tambahkan kelas spesifik jika hanya ingin icon gunung/volcano beranimasi */
+  animation: pulse 2s infinite;
+}
+
+/* ===== FOOTER ===== */
+.main-footer {
+  /* Corrected from .footer */
+  background: var(--text-dark);
+  color: var(--white);
+  text-align: center;
+  padding: var(--spacing-xl) 0;
+  margin-top: var(--spacing-3xl);
+  border-top: 5px solid var(--primary-green);
+}
+
+.main-footer p {
+  /* Corrected from .footer-text */
+  font-size: var(--font-size-sm);
+  margin: 0; /* Remove default paragraph margin */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .main-header .header-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+
+  .main-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  .auth-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .auth-btn {
+    flex-grow: 1;
+  }
+
+  .page-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .mountain-icon {
+    font-size: var(--font-size-3xl);
+  }
+
+  .page-subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .tab-navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tab-btn {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .content-container {
+    padding: var(--spacing-lg);
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section-icon {
+    font-size: var(--font-size-2xl);
+  }
+
+  .species-stats {
+    flex-direction: column;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr; /* Stack gallery cards on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .mountain-icon {
+    font-size: var(--font-size-2xl);
+  }
+
+  .section-subtitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .stat-number {
+    font-size: var(--font-size-2xl);
+  }
+}

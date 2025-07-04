@@ -61,25 +61,6 @@ if ($result_jalur->num_rows > 0) {
                 <p class="page-subtitle">Perdalam Wawasan dan Pengetahuan Anda Mengenai Gunung Ciremai</p>
             </div>
 
-            <div class="tab-navigation">
-                <button class="tab-btn">
-                    <span>📍</span>
-                    Tentang Gunung
-                </button>
-                <button class="tab-btn">
-                    <span>🌋</span>
-                    Vulkanologi & Geologi
-                </button>
-                <button class="tab-btn active">
-                    <span>🥾</span>
-                    Jalur Pendakian
-                </button>
-                <button class="tab-btn">
-                    <span>🌿</span>
-                    Keanekaragaman Hayati
-                </button>
-            </div>
-
             <div class="content-section">
                 <div class="section-header">
                     <h2 class="section-title">
