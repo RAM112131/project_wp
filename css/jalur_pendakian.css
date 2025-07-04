@@ -1,50 +1,4 @@
-/* ===== CSS VARIABLES ===== */
-:root {
-  /* Colors - Updated sesuai spesifikasi */
-  --primary-green: #4caf50;
-  --secondary-green: #2ecc71;
-  --light-green: #81c784;
-  --accent-green: #388e3c;
-  --text-dark: #1f2937;
-  --text-medium: #4b5563;
-  --text-light: #6b7280;
-  --white: #ffffff;
-  --light-gray: #f8f9fa;
-  --medium-gray: #e5e7eb;
-  --dark-gray: #9ca3af;
-
-  /* Difficulty Badge Colors */
-  --easy-color: #22c55e;
-  --medium-color: #f59e0b;
-  --hard-color: #ef4444;
-
-  /* Typography */
-  --font-family: "Poppins", sans-serif;
-
-  /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-
-  /* Border Radius */
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-}
-
-/* Import Google Fonts - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -52,581 +6,520 @@
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--white);
-  color: var(--text-dark);
+  font-family: "Poppins", sans-serif;
   line-height: 1.6;
+  color: #333;
+  background: #ffffff; /* Warna background utama putih */
   min-height: 100vh;
 }
 
+/* Container for general content centering */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 2rem;
 }
 
-/* ===== HEADER STYLES - GLASSMORPHISM ===== */
-.header {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 16px 0;
-  position: sticky;
+/* ==================================== */
+/* HEADER STYLES (Glassmorphism, Primary Green) */
+/* ==================================== */
+
+.main-header {
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: 1000;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.7); /* Background putih transparan */
+  backdrop-filter: blur(15px); /* Efek blur */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08); /* Garis bawah halus */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Shadow halus */
+  padding: 0.8rem 0;
 }
 
-.header .container {
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1400px; /* Lebar konten header */
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
-/* Logo Section */
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.75rem;
 }
 
 .logo-icon {
-  font-size: 28px;
-  color: var(--primary-green);
+  /* Menggunakan Font Awesome icon, primary color hijau */
+  font-size: 1.8rem;
+  color: #4caf50; /* Primary green for icon */
 }
 
 .logo-text {
-  color: var(--primary-green);
-  font-size: 20px;
+  color: #333; /* Teks gelap agar terlihat di header terang */
   font-weight: 700;
-  font-family: var(--font-family);
+  font-size: 1.3rem;
 }
 
-/* Navigation Menu */
-.nav-menu {
+.main-nav {
   display: flex;
-  gap: 32px;
+  gap: 1.8rem;
   align-items: center;
 }
 
-.nav-item {
-  color: var(--text-dark);
+.nav-link {
+  color: #555; /* Teks abu-abu gelap */
   text-decoration: none;
-  font-size: 15px;
   font-weight: 500;
-  padding: 8px 0;
   transition: all 0.3s ease;
-  position: relative;
-  font-family: var(--font-family);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
 }
 
-.nav-item:hover {
-  color: var(--primary-green);
+.nav-link:hover {
+  background: rgba(76, 175, 80, 0.1); /* Hijau transparan saat hover */
+  color: #4caf50; /* Teks hijau saat hover */
+  transform: translateY(-2px);
 }
 
-.nav-item.active {
-  color: var(--primary-green);
-  font-weight: 600;
+/* Penambahan: Gaya untuk link navigasi utama yang aktif */
+.main-nav .nav-link.active {
+  background: #4caf50; /* Latar belakang hijau */
+  color: white; /* Teks putih */
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3); /* Bayangan hijau */
+  transform: translateY(-2px); /* Agar tetap konsisten dengan hover */
 }
 
-/* Hover effect untuk navigation */
-.nav-item::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary-green);
-  transition: width 0.3s ease;
-}
-
-.nav-item:hover::after,
-.nav-item.active::after {
-  width: 100%;
-}
-
-/* Auth Buttons */
 .auth-buttons {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  gap: 1rem;
+}
+
+.auth-btn {
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none; /* Menghilangkan border default button */
 }
 
 .btn-login {
-  padding: 10px 24px;
-  border: 2px solid var(--primary-green);
-  border-radius: var(--radius-lg);
-  background: transparent;
-  color: var(--primary-green);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: var(--font-family);
-  font-size: 14px;
+  background: transparent; /* Transparan */
+  border: 1px solid #4caf50; /* Border hijau */
+  color: #4caf50; /* Teks hijau */
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.1);
 }
 
 .btn-login:hover {
-  background: var(--primary-green);
-  color: var(--white);
+  background: #4caf50; /* Hijau solid saat hover */
+  color: white;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.2);
 }
 
 .btn-register {
-  padding: 10px 24px;
-  border: none;
-  border-radius: var(--radius-lg);
-  background: var(--primary-green);
-  color: var(--white);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: var(--font-family);
-  font-size: 14px;
+  background: #4caf50; /* Hijau solid */
+  color: white; /* Teks putih */
+  border: 1px solid #4caf50; /* Border hijau */
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.2);
 }
 
 .btn-register:hover {
-  background: var(--accent-green);
+  background: #43a047; /* Sedikit lebih gelap saat hover */
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.3);
 }
 
-/* ===== MAIN CONTENT ===== */
+/* ==================================== */
+/* END HEADER STYLES */
+/* ==================================== */
+
+/* Main Content General Styles */
 .main-content {
-  padding: var(--spacing-2xl) 0;
-  min-height: calc(100vh - 200px);
+  /* Padding atas disesuaikan dengan tinggi header fixed + margin */
+  padding-top: calc(0.8rem * 2 + 1.8rem + 10px); /* Kira-kira tinggi header + sedikit margin */
+  padding-bottom: 2rem;
 }
 
-/* Page Header */
-.page-header {
+/* Info Header (Centralized title and subtitle) */
+.info-header {
   text-align: center;
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: 3rem;
+  color: #333;
+  padding-top: 2rem; /* Jika ingin ada ruang di atas */
 }
 
-.page-title {
+.icon-mountain {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #4caf50; /* Primary green */
+}
+
+.info-header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: var(--spacing-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-md);
+  margin-bottom: 0.5rem;
 }
 
-.mountain-icon {
-  font-size: 2.5rem;
-  color: var(--primary-green);
-}
-
-.page-subtitle {
+.subtitle {
   font-size: 1.1rem;
-  color: var(--text-medium);
+  color: #666;
   font-weight: 400;
 }
 
-/* ===== TAB NAVIGATION ===== */
+/* Tab Navigation (Buttons below main title) */
 .tab-navigation {
   display: flex;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-2xl);
   justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
   flex-wrap: wrap;
+  /* Penambahan: Glassmorphism effect untuk container tab-navigation */
+  background: rgba(255, 255, 255, 0.6); /* Sedikit transparan */
+  backdrop-filter: blur(10px); /* Efek blur */
+  border: 1px solid rgba(0, 0, 0, 0.08); /* Garis tepi halus */
+  border-radius: 12px; /* Sudut membulat */
+  padding: 1rem; /* Padding di sekitar tombol */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bayangan lembut */
 }
 
 .tab-btn {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: 12px 24px;
-  border: 2px solid var(--medium-gray);
-  border-radius: var(--radius-xl);
-  background: var(--white);
-  color: var(--text-medium);
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  /* Latar belakang tombol default (non-aktif) */
+  background: rgba(0, 0, 0, 0.05); /* Sedikit abu-abu transparan */
+  /* backdrop-filter: blur(5px); TIDAK DIBUTUHKAN DI SINI, CUKUP DI CONTAINERNYA */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 25px; /* Bentuk pil */
+  color: #555;
+  text-decoration: none; /* Penting karena sekarang ini <a> */
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: var(--font-family);
-  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  /* Tambahan: Pastikan teks tidak memilih/menyeret */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.tab-btn i {
+  color: #555; /* Icon color default */
+  transition: all 0.3s ease;
 }
 
 .tab-btn:hover {
-  border-color: var(--primary-green);
-  color: var(--primary-green);
+  background: #4caf50; /* Primary green saat hover */
+  color: white;
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3); /* Green shadow */
+  border-color: #4caf50;
+}
+
+.tab-btn:hover i {
+  color: white; /* Icon color saat hover */
 }
 
 .tab-btn.active {
-  border-color: var(--primary-green);
-  background: var(--primary-green);
-  color: var(--white);
-  box-shadow: var(--shadow-lg);
+  /* Class ini untuk tombol yang sedang aktif */
+  background: #4caf50; /* Primary green for active tabs */
+  color: white;
+  transform: translateY(-2px); /* Konsisten dengan hover */
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3); /* Green shadow */
+  border-color: #4caf50;
 }
 
-.tab-btn span {
-  font-size: 16px;
+.tab-btn.active i {
+  color: white; /* Icon color when active */
 }
 
-/* ===== CONTENT SECTION ===== */
-.content-section {
-  margin-bottom: var(--spacing-2xl);
+/* Content Sections (Cards below tabs) */
+.content-container {
+  padding-top: 1rem;
 }
 
-.section-header {
-  margin-bottom: var(--spacing-xl);
-}
-
-.section-title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--text-dark);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.section-icon {
-  font-size: 2rem;
-  color: var(--primary-green);
+.info-section {
+  display: none; /* Hidden by default, managed by JS */
 }
 
 .content-card {
-  background: var(--white);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-xl);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--medium-gray);
+  background: #ffffff; /* White background for info cards */
+  border-radius: 12px;
+  padding: 2.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+  margin-bottom: 2rem;
 }
 
-/* ===== TRAIL CARDS ===== */
-.trail-card {
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.section-icon {
+  font-size: 1.8rem;
+  color: #4caf50; /* Primary green for section icons */
+}
+
+.section-header h2.section-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Specific styling for Vulkanologi & Geologi section header icon */
+.vulkanologi-section .section-icon {
+  color: #ff6b6b; /* Red for fire/volcano icon */
+}
+
+/* Specific styling for Keanekaragaman Hayati section header icon */
+.keanekaragaman-section .section-icon {
+  color: #28a745; /* Green for leaf/nature icon */
+}
+
+/* Card Grid (for multiple info items in a section) */
+.card-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: var(--spacing-xl);
-  padding: var(--spacing-xl);
-  margin-bottom: var(--spacing-xl);
-  background: var(--light-gray);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--medium-gray);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.card-item {
+  background: #f8f8f8;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
   transition: all 0.3s ease;
+  border-left: 5px solid #4caf50; /* Border kiri primary green */
 }
 
-.trail-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--primary-green);
+.card-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.trail-card:last-of-type {
-  margin-bottom: 0;
-}
-
-.trail-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-lg);
-}
-
-.trail-title {
-  font-size: 1.5rem;
+.card-item h4 {
+  font-size: 1.1rem;
   font-weight: 600;
-  color: var(--text-dark);
+  color: #333;
+  margin-bottom: 0.5rem;
 }
 
-/* Difficulty Badges */
-.difficulty-badge {
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.difficulty-badge.easy {
-  background: rgba(34, 197, 94, 0.1);
-  color: var(--easy-color);
-  border: 1px solid var(--easy-color);
-}
-
-.difficulty-badge.medium {
-  background: rgba(245, 158, 11, 0.1);
-  color: var(--medium-color);
-  border: 1px solid var(--medium-color);
-}
-
-.difficulty-badge.hard {
-  background: rgba(239, 68, 68, 0.1);
-  color: var(--hard-color);
-  border: 1px solid var(--hard-color);
-}
-
-/* Trail Details */
-.trail-details {
-  margin-bottom: var(--spacing-lg);
-}
-
-.detail-item {
-  margin-bottom: var(--spacing-sm);
-  font-size: 14px;
-  color: var(--text-medium);
-  line-height: 1.5;
-}
-
-.detail-item strong {
-  color: var(--text-dark);
-  font-weight: 600;
-}
-
-/* Trail Buttons */
-.trail-buttons {
-  display: flex;
-  gap: var(--spacing-md);
-  flex-wrap: wrap;
-}
-
-.btn-booking,
-.btn-maps {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  padding: 12px 20px;
-  border-radius: var(--radius-lg);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: var(--font-family);
-  font-size: 14px;
-  text-decoration: none;
-  border: none;
-}
-
-.btn-booking {
-  background: var(--primary-green);
-  color: var(--white);
-}
-
-.btn-booking:hover {
-  background: var(--accent-green);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-maps {
-  background: var(--white);
-  color: var(--primary-green);
-  border: 2px solid var(--primary-green);
-}
-
-.btn-maps:hover {
-  background: var(--primary-green);
-  color: var(--white);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
-.btn-icon {
-  font-size: 16px;
-}
-
-/* Trail Image Placeholder */
-.trail-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-placeholder {
-  width: 100%;
-  height: 200px;
-  background: linear-gradient(135deg, var(--light-green), var(--primary-green));
-  border-radius: var(--radius-lg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--white);
-  padding: var(--spacing-lg);
-}
-
-.image-text {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: var(--spacing-sm);
-}
-
-.image-subtext {
-  font-size: 12px;
-  opacity: 0.9;
-}
-
-/* ===== INFO BOX ===== */
-.info-box {
-  background: linear-gradient(135deg, rgba(76, 175, 80, 0.05), rgba(46, 204, 113, 0.05));
-  border: 1px solid var(--primary-green);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
-  margin-top: var(--spacing-xl);
-}
-
-.info-box h3 {
-  color: var(--primary-green);
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: var(--spacing-lg);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.info-box ul {
-  list-style: none;
-  padding: 0;
-}
-
-.info-box li {
-  margin-bottom: var(--spacing-md);
-  padding-left: var(--spacing-lg);
-  position: relative;
-  color: var(--text-medium);
+.card-item p {
+  color: #666;
   line-height: 1.6;
 }
 
-.info-box li::before {
-  content: "✓";
-  position: absolute;
-  left: 0;
-  color: var(--primary-green);
-  font-weight: bold;
+/* Detail Grid (for specific details, like the bottom section of "Tentang Gunung") */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
 }
 
-.info-box li strong {
-  color: var(--text-dark);
+.detail-item {
+  background: #4caf50; /* Primary green for detail items */
+  color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+  background: #43a047; /* Slightly darker green on hover */
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+.detail-item h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.detail-item p {
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* Timeline Section (specific to Vulkanologi, example) */
+.timeline-section {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: #ffffff; /* White background */
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-section .section-subtitle {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #333;
   font-weight: 600;
 }
 
-/* ===== FOOTER ===== */
-.footer {
-  background: var(--text-dark);
-  color: var(--white);
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  background: #f8f8f8; /* Light grey background for timeline item */
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 5px solid #ff6b6b; /* Red border for timeline events (alerts) */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-year {
+  background: #ff6b6b; /* Red background for the year (alert/important) */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 100px;
   text-align: center;
-  padding: var(--spacing-xl) 0;
-  margin-top: auto;
+  flex-shrink: 0;
 }
 
-.footer-text {
-  font-size: 14px;
-  opacity: 0.8;
+.timeline-content p {
+  line-height: 1.6;
+  color: #333;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1024px) {
-  .nav-menu {
-    gap: 24px;
-  }
+/* FOOTER */
+.main-footer {
+  background: #222; /* Dark footer, adjust if needed to match a lighter theme */
+  color: white;
+  text-align: center;
+  padding: 1.5rem 0;
+  margin-top: 3rem;
+}
 
-  .page-title {
-    font-size: 2.2rem;
+/* Responsive Design */
+@media (max-width: 992px) {
+  .main-nav {
+    gap: 1rem;
   }
-
-  .trail-card {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
+  .auth-buttons {
+    gap: 0.5rem;
+  }
+  .auth-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  .logo-text {
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .header .container {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: flex-start; /* Logo dan auth tetap di kiri/kanan */
+  }
+
+  .main-nav {
     flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .nav-menu {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    gap: 20px;
-    padding-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .page-title {
-    font-size: 1.8rem;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
-  .tab-navigation {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .tab-btn {
-    width: 100%;
-    max-width: 300px;
-    justify-content: center;
-  }
-
-  .trail-buttons {
-    flex-direction: column;
-  }
-
-  .btn-booking,
-  .btn-maps {
+    gap: 0.8rem;
     justify-content: center;
     width: 100%;
+    margin-top: 15px; /* Tambahan margin untuk memisahkan dari logo */
+    margin-bottom: 15px; /* Tambahan margin untuk memisahkan dari auth buttons */
+  }
+
+  .auth-buttons {
+    width: 100%;
+    justify-content: center;
   }
 
   .container {
-    padding: 0 16px;
+    padding: 1rem;
+  }
+
+  .info-header h1 {
+    font-size: 2rem;
+  }
+
+  .card-grid,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-item {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .timeline-year {
+    align-self: flex-start;
+  }
+
+  .tab-navigation {
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem; /* Sedikit mengurangi padding di mobile */
+  }
+
+  .tab-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem; /* Sedikit mengurangi padding di mobile */
+  }
+  .tab-btn i {
+    font-size: 16px; /* Ukuran ikon tab lebih kecil */
+  }
+
+  .content-card {
+    padding: 1.5rem;
+  }
+  .section-header h2.section-title {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
+  .info-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
   .logo-text {
-    font-size: 16px;
+    font-size: 1.1rem;
   }
-
-  .nav-item {
-    font-size: 14px;
+  .logo-icon {
+    font-size: 1.5rem; /* Ukuran icon FA lebih kecil di mobile */
   }
-
-  .btn-login,
-  .btn-register {
-    padding: 8px 16px;
-    font-size: 12px;
+  .main-nav {
+    font-size: 0.9rem;
   }
-
-  .page-title {
-    font-size: 1.5rem;
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .trail-card {
-    padding: var(--spacing-lg);
-  }
-
-  .trail-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-sm);
-  }
-
-  .image-placeholder {
-    height: 150px;
-  }
-
-  .info-box {
-    padding: var(--spacing-lg);
+  .auth-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.8rem;
   }
 }

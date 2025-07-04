@@ -1,25 +1,72 @@
 <?php
-session_start();
+session_start(); // Pastikan session_start() ada di paling atas, sebelum output HTML apapun!
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Create Account - Alas Jiwa</title>
 
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="./css/daftar.css">
-  <link rel="stylesheet" href="./css/google.register.css">
+  <link rel="stylesheet" href="./css/daftar.css" />
+  <link rel="stylesheet" href="./css/google.register.css" /> 
+  
+  <style>
+    /* Mengatur lebar tombol Create Account agar konsisten */
+    .create-btn {
+        width: 100%; /* Pastikan tombol mengambil lebar penuh container */
+        padding: 12px 20px; /* Sesuaikan padding agar terlihat proporsional */
+        font-size: 1rem; /* Sesuaikan ukuran font */
+        /* Pastikan background-color, color, border-radius, dll. sesuai dengan desain kamu di daftar.css */
+    }
+
+    /* Mengatur container untuk tombol Google agar sejajar dan selebar tombol lain */
+    /* Google GSI button (g_id_signin) adalah iframe, jadi kita styling parent-nya atau wrap dengan div */
+    .google-signin-wrapper {
+        width: 100%; /* Agar wrapper mengambil lebar penuh */
+        display: flex; /* Untuk merata-tengahkan tombol Google di dalamnya */
+        justify-content: center; /* Merata-tengahkan horizontal */
+        margin-bottom: 15px; /* Jarak bawah jika perlu */
+    }
+
+    /* Menyesuaikan teks "Or" sebagai divider */
+    .divider-text {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7); /* Warna teks putih transparan */
+      margin: 25px 0; /* Jarak atas dan bawah */
+      font-size: 0.95rem; /* Ukuran font yang pas */
+    }
+
+    .divider-text::before,
+    .divider-text::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Garis putih transparan */
+    }
+
+    .divider-text:not(:empty)::before {
+      margin-right: .75em;
+    }
+
+    .divider-text:not(:empty)::after {
+      margin-left: .75em;
+    }
+    
+    /* Gaya untuk pesan error/success dari sesi */
+    .alert {
+        margin-bottom: 1rem; /* Jarak bawah pesan alert */
+        border-radius: .5rem; /* Sudut membulat */
+    }
+  </style>
 </head>
 
 <body>
@@ -28,7 +75,6 @@ session_start();
     <div class="overlay position-absolute w-100 h-100" style="z-index: 1;"></div>
     <div class="container-fluid h-100 position-relative" style="z-index: 2;">
       <div class="row h-100">
-        <!-- Kiri -->
         <div class="col-lg-6 d-flex flex-column justify-content-between text-white p-5">
           <div>
             <h2 class="mb-2">Welcome To</h2>
@@ -48,31 +94,27 @@ session_start();
           </div>
         </div>
 
-        <!-- Kanan -->
         <div class="col-lg-6 d-flex align-items-center justify-content-center p-4">
           <div class="bg-white bg-opacity-10 backdrop-blur p-5 rounded-4 w-100" style="max-width: 450px;">
             
-            <!-- Flash message -->
+            <?php // session_start(); // Baris ini sudah dipindahkan ke paling atas ?> 
             <?php if (isset($_SESSION['error'])): ?>
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <?= $_SESSION['error'] ?>
+                <?= htmlspecialchars($_SESSION['error']) ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               <?php unset($_SESSION['error']); ?>
             <?php endif; ?>
-
             <?php if (isset($_SESSION['success'])): ?>
               <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <?= $_SESSION['success'] ?>
+                <?= htmlspecialchars($_SESSION['success']) ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
               <?php unset($_SESSION['success']); ?>
             <?php endif; ?>
 
-            <!-- Judul Form -->
             <h2 class="text-white fw-bold text-center mb-4">Create an account</h2>
 
-            <!-- Form pendaftaran -->
             <form action="proses_daftar.php" method="POST" novalidate>
               <div class="row mb-3">
                 <div class="col-md-6 mb-3 mb-md-0">
@@ -92,7 +134,7 @@ session_start();
               </div>
 
               <div class="mb-3">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password (min 6 karakter)" required minlength="6">
+                <input type="password" class="form-control" name="password" placeholder="Password (min 6 karakter)" required minlength="6">
               </div>
 
               <div class="mb-4">
@@ -102,79 +144,57 @@ session_start();
               <button type="submit" class="create-btn mb-3">Create Account</button>
             </form>
 
-            <!-- Divider -->
-            <div class="text-center text-white mb-3">
-              <span class="px-3" style="background: rgba(255,255,255,0.1); border-radius: 20px;">Or</span>
+            <div class="divider-text">
+              <span>Or</span>
             </div>
 
-            <!-- Google Button -->
-            <button type="button" class="btn btn-outline-light w-100 google-btn" id="googleSignInBtn" onclick="signInWithGoogle()">
-              <i class="fab fa-google me-2"></i> Sign up with Google
-            </button>
+            <div class="google-signin-wrapper">
+                <div id="g_id_onload"
+                  data-client_id="300144113544-bh6c0tiodpnabmcitdnq5jpuvrfccrqi.apps.googleusercontent.com"
+                  data-context="signup"
+                  data-ux_mode="popup"
+                  data-callback="handleCredentialResponse"
+                  data-auto_prompt="false" 
+                  data-auto_select="false"> 
+                </div>
+
+                <div class="g_id_signin"
+                  data-type="standard"
+                  data-size="large"
+                  data-theme="outline"
+                  data-text="sign_up_with"
+                  data-shape="pill"
+                  data-logo_alignment="left">
+                </div>
+            </div>
+            
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Firebase & JS -->
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBOZo6R-FAF3KdoC3Xw28F6RiWL4qfx7XY",
-      authDomain: "webproject-5f104.firebaseapp.com",
-      projectId: "webproject-5f104",
-      storageBucket: "webproject-5f104.appspot.com",
-      messagingSenderId: "300144113544",
-      appId: "1:300144113544:web:f35663fbf07deec1496c3d",
-      measurementId: "G-DERMQJFLM8"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    window.signInWithGoogle = async function() {
-      try {
-        const provider = new GoogleAuthProvider();
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-
-        const btn = document.getElementById('googleSignInBtn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
-        btn.disabled = true;
-
-        const res = await fetch('google_register.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: user.email,
-            first_name: user.displayName.split(' ')[0],
-            last_name: user.displayName.split(' ').slice(1).join(' '),
-            uid: user.uid,
-            photo_url: user.photoURL,
-            provider: 'google'
-          })
-        });
-
-        const data = await res.json();
-        if (data.status === 'success' || data.status === 'ok') {
+  <script>
+    function handleCredentialResponse(response) {
+      fetch('google_register_handler.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ credential: response.credential })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
           window.location.href = '0dashboard.php';
         } else {
-          throw new Error(data.message || 'Gagal simpan user.');
+          alert('Gagal daftar/login dengan Google: ' + (data.message || 'Terjadi kesalahan tidak diketahui.'));
+          console.error("DETAIL ERROR DARI SERVER:", data.detail || data.message);
         }
-
-      } catch (err) {
-        console.error("Google Sign-In error:", err);
-        alert("Gagal login dengan Google. Silakan coba lagi.");
-        document.getElementById('googleSignInBtn').innerHTML = '<i class="fab fa-google me-2"></i> Sign up with Google';
-        document.getElementById('googleSignInBtn').disabled = false;
-      }
-    };
+      })
+      .catch(err => {
+        console.error("Google Sign-In fetch error:", err);
+        alert("Terjadi kesalahan jaringan saat mencoba login dengan Google.");
+      });
+    }
   </script>
 </body>
 </html>
